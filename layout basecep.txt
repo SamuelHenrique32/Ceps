@@ -1,0 +1,111 @@
+Arquivos de Cep do Brasil
+
+Arquivo Cepcid
+==============
+Tabela de cidades 
+
+Campos		Tamanho	Descricao 		
+Uf		02	Uf da Cidade
+Chave		05	Chave da Cidade
+Cepmin 		08	Faixa de Cep - cep minimo
+Cepmax		08	Faixa de Cep - cep maximo
+Cidade		60	nome da cidade
+Cidade Acento	60	nome da cidade acentuada
+Cod_Cidade	05	codigo da cidade
+Tipo_Cidade	01	tipo da cidade (M-Municipio,D-Distrito,P-povoado,R-Região Administrativa)
+Cod_Cidade_Sub	05	codigo da cidade a que está subordinado
+Cod_Mun		07	código de município do IBGE     
+
+Campo Chave 
+
+o campo chave pode assumir os valores abaixo 
+
+Chave	Descrição
+C	cidade possui cep unico
+D	distrito possui cep unico
+L	distrito possui cep por logradouro
+99999	cidade com cep por logradouro
+
+(os distritos sempre estão subordinados a uma cidade)
+
+
+Arquivo CepLog
+==============
+Tabela de Logradouros
+
+Campos		Tamnaho	Descricao 
+
+CEP		8	cep do logradouro
+Chave		5	Chave da Cidade do logradouro
+Uf		2	Uf do logradouro
+Tipo		15	Tipo do logradouro 
+Tipo Acento	15	Tipo do logradouro acentuado
+Titulo 		15	Titulo do logradouro 
+Titulo	Acento  15	Titulo do logradouro acentuado 
+Preposicao	15	Preposicao incial do logradouro
+Nome		60	Nome do Logradouro
+Nome Acento	60	Nome do Logradouro acentuado
+Bairro1		30	Bairro do inicio do logradouro
+Bairro1 Acento	30	Bairro do inicio do logradouro acentuado
+Bairro2 	30	Bairro do fim do logradouro
+LiminPar 	8	Limite Inferior lado par
+Liminfimpa 	8 	Limite Inferior lado impar
+Limsuppar 	8 	Limite Superior lado par
+Limsupimpa 	8 	Limite Superior lado impar
+Flag		1	Indica o tipo de cep
+Lados		2	Indica o Lado da rua
+
+Relacionamento:
+===============
+
+Os dois arquivos se relacionam atraves do campo Chave e UF
+
+A tabela cepcid contém as faixas de ceps de todas as cidades e a tabela ceplog 
+contém os ceps de todos os logradouros.
+
+Exemplos:
+
+1.Localizar o cep de um logradouro de uma cidade que tem cep unico:
+
+Efetue a pesquisa na tabela cepcid com o nome da cidade e a uf, se o registro que foi localizado
+tiver no campo chave a letra "C" ou "D" esta cidade possui cep unico e o cep é o que esta
+no campo cepmin. Todos os logradouros desta cidade usarão este cep e neste caso não é possível
+validar o logradouro pq o mesmo não se encontra cadastrado pelos Correios.
+
+Qd aparecer a letra "D" no campo chave significa que este distrito está subordinado 
+a cidade que pode ser localizada através do campo Cod_Cidade_Sub.
+
+
+2. Localizar o cep de um logradouro de uma cidade que tem cep por logradouro
+
+Efetue a pesquisa na tabela cepcid com o nome da cidade e a uf, se o registro que foi localizado
+tiver no campo chave "99999" cinco numeros, significa que esta cidade tem cep por logradouro e vc
+deverá efetuar a pesquisa na tabela ceplog com esta chave para achar o cep deste logradouro.
+
+3. Localizar o cep de um logradouro de um distrito que tem cep por logradouro
+
+Efetue a pesquisa na tabela cepcid com o nome da cidade e a uf, se o registro que foi localizado
+tiver no campo chave "L" , significa que este distrito tem cep por logradouro e vc devera primeiro
+localizar a cidade a que ele esta subordinado pesquisando no campo Cod_Cidade o valor do campo
+Cod_Cidade_Sub com a chave "99999" encontrada vc deverá efetuar a pesquisa na tabela ceplog.
+
+
+Flag
+=====
+
+0     'indica cep comun
+6     'indica cep especial
+
+Lados
+=====
+1     ' indica todo lado par
+2     ' indica lado par limitado
+15    ' abrange lado par
+16    ' indica todo lado impar
+32    ' indica lado impar limitado
+240   ' abrange lado impar
+17    ' abrange toda o logradouro
+34    ' indica CEP limitado
+35    ' indica CEP SEM NUMERO
+
+Obs: Os ceps que tiverem 07 digitos devem ser acrescidos de 0 a esquerda.
