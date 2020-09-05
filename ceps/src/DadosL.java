@@ -44,7 +44,7 @@ public String print(){
                  "UF: "+this.UF+"\n"+
                  "Tipo: "+this.tipo+"\n"+
                  "Titulo: "+this.titulo+"\n"+
-                 "Preposição: "+this.prep+"\n"+
+                 "Preposicao: "+this.prep+"\n"+
                  "Bairro1: "+this.bairro+"\n"+
                  "Bairro2: "+this.bairro2+"\n"+
                  "LiminPar: "+this.liminPar+"\n"+

@@ -7,26 +7,14 @@ import java.util.ArrayList;
 public class Leitura {
     ArrayList<DadosC> objCid = new ArrayList();
     ArrayList<DadosL> objLog = new ArrayList();
-    String arquivoCid = "cepcid-demo.csv";
-    String arquivoLog = "ceplog-demo.csv";
-    
-    
-    
-    public void main() {
-        leCid();
-        leLog();
-        
-        printCid();
-        printLog();
-        
-    }
-    
+    String arquivoCid = "../Files/cepcid-demo.csv";
+    String arquivoLog = "../Files/ceplog-demo.csv";
+
     public void printLog(){
         
          for(int i=0; i<objCid.size();i++){
             System.out.println(objLog.get(i).print());
         }
-        
     }
     
     public void leLog() {
@@ -45,9 +33,6 @@ public class Leitura {
               objLog.add(new DadosL(dados));
               linha = br.readLine();
             }
-            
-          
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -60,10 +45,8 @@ public class Leitura {
                     e.printStackTrace();
                 }
             }
-        }
-        
-        
-      }
+        }        
+    }
     
     public void printCid(){
         
@@ -89,9 +72,6 @@ public class Leitura {
               objCid.add(new DadosC(dados));
               linha = br.readLine();
             }
-            
-          
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -105,8 +85,5 @@ public class Leitura {
                 }
             }
         }
-        
-        
-      }
-   
+    }   
 }
