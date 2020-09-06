@@ -34,7 +34,7 @@ public class Main {
 				break;
 
 				case kOPC_EXIBIR_CIDADES_LOGRADOUROS:
-				
+					utils.exibirNomeCidadeLogradouros(leitura);
 				break;
 
 				default:

@@ -10,7 +10,7 @@ public class Utils {
 		for(DadosL objL : leitura.objLog) {
 
 			for(DadosC objC : leitura.objCid) {
-				if(objL.chave.equals(objC.chave)) {
+				if(objL.chave.equals(objC.chave) && objL.UF.equals(objC.UF)) {
 
 					System.out.println("Cep: " + objL.CEP + " Chave cidade: " + objL.chave + " Nome Cidade: " + objC.cidade);
 					System.out.println("Minimo valor de CEP possivel: " + objC.cepmin + " Maximo valor de CEP possivel: " + objC.cepmax);
@@ -37,5 +37,30 @@ public class Utils {
 		System.out.println("======================= " + "Estatísticas" + " =======================");
 		System.out.println("Quantidade de registros corretos: " + quantCorretos);
 		System.out.println("Quantidade de registros errados: " + quantErrados);
+	}
+
+	public void exibirNomeCidadeLogradouros(Leitura leitura) {
+		
+		int quantRegistros = 0;
+		
+		for(DadosC objC : leitura.objCid) {
+
+			// Skip first register
+			if(objC.cidade.equals("CIDADE")){
+				continue;
+			}
+
+			quantRegistros = 0;
+			System.out.println("======================= Logradouros da Cidade: " + objC.cidade + " =======================");
+
+			for(DadosL objL : leitura.objLog) {
+				if(objC.chave.equals(objL.chave) && (objC.UF.equals(objL.UF))){
+					System.out.println(objL.nome + ", CEP: " + objL.CEP);
+					quantRegistros++;
+				}			
+			}
+			
+			System.out.println("\nRegistros encontrados: " + quantRegistros + "\n");
+		}
 	}
 }
